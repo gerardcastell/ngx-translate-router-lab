@@ -14,7 +14,7 @@ const routes: Routes = [
   imports: [
     TranslateModule.forChild(),
     RouterModule.forChild(routes),
-    LocalizeRouterModule.forRoot(routes),
+    LocalizeRouterModule.forChild(routes),
   ],
   exports: [RouterModule],
 })
