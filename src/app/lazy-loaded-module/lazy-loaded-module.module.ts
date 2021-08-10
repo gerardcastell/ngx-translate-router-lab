@@ -7,9 +7,10 @@ import { RouterModule } from '@angular/router';
 import { LocalizeRouterModule } from '@gilsdav/ngx-translate-router';
 import { TranslateModule } from '@ngx-translate/core';
 import { routes } from '../app-routing.module';
+import { LazyLoadedChildComponent } from '../lazy-loaded-child/lazy-loaded-child.component';
 
 @NgModule({
-  declarations: [LazyLoadedModuleComponent],
+  declarations: [LazyLoadedModuleComponent, LazyLoadedChildComponent],
   imports: [CommonModule, LazyLoadedModuleRoutingModule],
 })
 export class LazyLoadedModuleModule {}

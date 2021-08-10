@@ -1,8 +1,9 @@
+<p>Change language buttons</p>
 <app-language-switcher></app-language-switcher>
-
 <p>Navigation Buttons</p>
 <button (click)="onClick('/')">Main page</button>
-<button (click)="onClick('/lazy')">Lazy Load Componenet</button>
-<button (click)="onClick('/no-lazy')">Non-Lazy Load Componenet</button>
+<button (click)="onClick('/lazy')">Lazy Load Component</button>
+<button (click)="onClick('/no-lazy')">Non-Lazy Load Component</button>
+<button (click)="onClick('/lazy/child')">Child lazy load Component</button>
 
 <router-outlet></router-outlet>

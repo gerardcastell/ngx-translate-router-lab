@@ -14,7 +14,7 @@ export class AppComponent {
     private localize: LocalizeRouterService
   ) {}
 
-  onClick(route: '/lazy' | '/no-lazy' | '/'): void {
+  onClick(route: string): void {
     this.router.navigate([this.localize.translateRoute(route)]);
   }
 }

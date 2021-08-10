@@ -2,7 +2,8 @@
   "ROUTES": {
     "home": "home",
     "lazy": "lazy-loaded-page",
-    "no-lazy": "non-lazy-loaded-page"
+    "no-lazy": "non-lazy-loaded-page",
+    "child": "child-loaded"
   },
   "HELLO": "Hello world!"
 }
