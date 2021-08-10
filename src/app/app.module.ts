@@ -16,6 +16,7 @@ import { LanguageSwitcherComponent } from './language-switcher/language-switcher
 import { TranslateLoader } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ViewComponent } from './view/view.component';
 
 export function createTranslateRouterLoader(
   translate: TranslateService,
@@ -36,7 +37,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, LanguageSwitcherComponent],
+  declarations: [AppComponent, LanguageSwitcherComponent, ViewComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -63,6 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   providers: [],
   bootstrap: [AppComponent],
+  exports: [TranslateModule],
 })
 export class AppModule {
   constructor(private translate: TranslateService) {

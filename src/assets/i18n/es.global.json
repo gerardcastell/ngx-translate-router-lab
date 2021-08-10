@@ -1,7 +1,8 @@
 {
   "ROUTES": {
     "home": "hogar",
-    "lazy": "pagina-vaga-cargada"
+    "lazy": "pagina-cargada-lazy",
+    "no-lazy": "pagina-cargada-sin-lazy"
   },
   "HELLO": "Hola mundo!"
 }
