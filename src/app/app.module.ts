@@ -13,8 +13,11 @@ import {
 import { RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
+import { TranslateLoader } from '@ngx-translate/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-export function createTranslateLoader(
+export function createTranslateRouterLoader(
   translate: TranslateService,
   location: Location,
   settings: LocalizeRouterSettings
@@ -28,12 +31,23 @@ export function createTranslateLoader(
   );
 }
 
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.global.json');
+}
+
 @NgModule({
   declarations: [AppComponent, LanguageSwitcherComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TranslateModule.forRoot(),
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
+    }),
     RouterModule.forRoot(routes, {
       initialNavigation: 'disabled',
       relativeLinkResolution: 'legacy',
@@ -41,12 +55,8 @@ export function createTranslateLoader(
     LocalizeRouterModule.forRoot(routes, {
       parser: {
         provide: LocalizeParser,
-        useFactory: createTranslateLoader,
-        deps: [
-          TranslateService,
-          Location,
-          LocalizeRouterSettings /*, HttpClient*/,
-        ],
+        useFactory: createTranslateRouterLoader,
+        deps: [TranslateService, Location, LocalizeRouterSettings, HttpClient],
       },
       initialNavigation: true,
     }),
@@ -54,4 +64,8 @@ export function createTranslateLoader(
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private translate: TranslateService) {
+    this.translate.addLangs(['es', 'en']);
+  }
+}

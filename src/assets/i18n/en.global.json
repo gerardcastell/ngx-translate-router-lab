@@ -2,5 +2,6 @@
   "ROUTES": {
     "home": "home",
     "lazy": "lazy-loaded-page"
-  }
+  },
+  "HELLO": "Hello world!"
 }
