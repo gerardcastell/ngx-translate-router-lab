@@ -8,7 +8,7 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'lazy-loaded-module',
+    path: 'lazy',
     loadChildren: () =>
       import('./lazy-loaded-module/lazy-loaded-module.module').then(
         (m) => m.LazyLoadedModuleModule

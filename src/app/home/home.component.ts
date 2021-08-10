@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalizeRouterService } from '@gilsdav/ngx-translate-router';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private localize: LocalizeRouterService
+  ) {}
 
   ngOnInit(): void {}
   onClick(): void {
-    this.router.navigate(['/lazy-loaded-module']);
+    this.router.navigate([this.localize.translateRoute('lazy')]);
   }
 }

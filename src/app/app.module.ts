@@ -12,6 +12,7 @@ import {
 } from '@gilsdav/ngx-translate-router';
 import { RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
+import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
 
 export function createTranslateLoader(
   translate: TranslateService,
@@ -28,7 +29,7 @@ export function createTranslateLoader(
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LanguageSwitcherComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

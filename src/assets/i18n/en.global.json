@@ -1,0 +1,6 @@
+{
+  "ROUTES": {
+    "home": "home",
+    "lazy": "lazy-loaded-page"
+  }
+}
