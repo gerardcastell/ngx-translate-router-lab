@@ -17,6 +17,8 @@ import { TranslateLoader } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ViewComponent } from './view/view.component';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export function createTranslateRouterLoader(
   translate: TranslateService,
@@ -32,6 +34,46 @@ export function createTranslateRouterLoader(
   );
 }
 
+export class MultiTranslateHttpLoader implements TranslateLoader {
+  constructor(
+    private http: HttpClient,
+    public resources: { prefix: string; suffix: string }[] = [
+      {
+        prefix: '/assets/i18n/',
+        suffix: `.json`,
+      },
+    ]
+  ) {}
+  /**
+   * Gets the translations from the server
+   * @param lang
+   * @returns {any}
+   */
+  public getTranslation(lang: string): any {
+    return forkJoin(
+      this.resources.map((config) =>
+        this.http.get(`${config.prefix}${lang}${config.suffix}`)
+      )
+    ).pipe(
+      map((response) =>
+        response.reduce((a: any, b: any) => {
+          const obj: any = Object.assign(a, b);
+          return obj;
+        })
+      )
+    );
+  }
+}
+
+export function multiTranslateLoader(http: HttpClient) {
+  return new MultiTranslateHttpLoader(http, [
+    {
+      prefix: './assets/i18n/',
+      suffix: '.global.json',
+    },
+  ]);
+}
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.global.json');
 }
@@ -45,7 +87,8 @@ export function createTranslateLoader(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: createTranslateLoader,
+        useFactory: multiTranslateLoader,
+        // useFactory: createTranslateLoader,
         deps: [HttpClient],
       },
     }),

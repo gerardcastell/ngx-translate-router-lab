@@ -6,8 +6,13 @@ import { LazyLoadedChildComponent } from '../lazy-loaded-child/lazy-loaded-child
 import { LazyLoadedModuleComponent } from './lazy-loaded-module.component';
 
 const routes: Routes = [
-  { path: '', component: LazyLoadedModuleComponent },
-  { path: 'child', component: LazyLoadedChildComponent },
+  {
+    path: '',
+    children: [
+      { path: '', component: LazyLoadedModuleComponent },
+      { path: 'child', component: LazyLoadedChildComponent },
+    ],
+  },
 ];
 
 @NgModule({

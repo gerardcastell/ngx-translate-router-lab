@@ -6,18 +6,23 @@ import { ViewComponent } from './view/view.component';
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'no-lazy',
-    component: ViewComponent,
-  },
-  {
-    path: 'lazy',
-    loadChildren: () =>
-      import('./lazy-loaded-module/lazy-loaded-module.module').then(
-        (m) => m.LazyLoadedModuleModule
-      ),
+    children: [
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'no-lazy',
+        component: ViewComponent,
+      },
+      {
+        path: 'lazy',
+        loadChildren: () =>
+          import('./lazy-loaded-module/lazy-loaded-module.module').then(
+            (m) => m.LazyLoadedModuleModule
+          ),
+      },
+    ],
   },
 ];
 
